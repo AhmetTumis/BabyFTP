@@ -4,13 +4,16 @@
 #include <vector>
 #include <netinet/in.h>
 #include <unistd.h>
-#include <openssl/sha.h>
+#include "checksum.cpp"
 
-std::string CalculateChecksum(const std::vector<char>& data, size_t size);
 
 void HandleClient(int clientSocket){};
 
 int main(){
     std::cout << "FTP server listening\n";
+    std::string testStr = "TEST";
+    std::vector<char> data(testStr.begin(), testStr.end());
+    auto result = CalculateChecksum(data, data.size());
+    std::cout << "Hash result: " << result << "\n";
     return 0;
 }
