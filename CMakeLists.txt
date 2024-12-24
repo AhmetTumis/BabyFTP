@@ -15,3 +15,7 @@ add_executable(server server/server.cpp)
 find_package(OpenSSL REQUIRED)
 target_link_libraries(client OpenSSL::Crypto util)
 target_link_libraries(server OpenSSL::Crypto util)
+
+
+file(COPY ${CMAKE_CURRENT_SOURCE_DIR}/server/hosted_files
+     DESTINATION ${CMAKE_CURRENT_BINARY_DIR})
