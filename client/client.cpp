@@ -6,7 +6,7 @@
 #include <sys/socket.h>
 #include <arpa/inet.h>
 #include <unistd.h>
-#include "checksum.cpp"
+#include "checksum.h"
 
 //STOR
 void UploadFile(int clientFd, const std::string& filePath){
@@ -59,7 +59,9 @@ void DownloadFile(int clientFd, const std::string& fileName){
 int main() {
     const size_t chunkSize = 4096;
     int clientFd = socket(AF_INET, SOCK_STREAM, 0);
-    sockaddr_in serverAddr = {AF_INET, htons(2102)};
+    sockaddr_in serverAddr = {};
+    serverAddr.sin_family = AF_INET;
+    serverAddr.sin_port = htons(2102);
     inet_pton(AF_INET, "127.0.0.1", &serverAddr.sin_addr);
 
     connect(clientFd, (sockaddr*)&serverAddr, sizeof(serverAddr));

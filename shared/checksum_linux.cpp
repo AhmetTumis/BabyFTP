@@ -1,7 +1,5 @@
+#include "checksum.h"
 #include <openssl/sha.h>
-#include <iomanip>
-#include <sstream>
-#include <vector>
 
 std::string CalculateChecksum(const std::vector<char>& data, size_t size){
     unsigned char hash[SHA256_DIGEST_LENGTH]; //32

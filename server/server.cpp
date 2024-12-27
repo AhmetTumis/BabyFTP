@@ -6,7 +6,7 @@
 #include <unistd.h>
 #include <filesystem>
 #include <dirent.h>
-#include "checksum.cpp"
+#include "checksum.h"
 
 void HandleClient(int clientSocket){
 
@@ -93,8 +93,10 @@ void HandleClient(int clientSocket){
 int main(){
 
     int serverFd = socket(AF_INET, SOCK_STREAM, 0);
-    sockaddr_in serverAddr = {AF_INET, htons(2102), INADDR_ANY};
-
+    sockaddr_in serverAddr = {};
+    serverAddr.sin_family = AF_INET;
+    serverAddr.sin_port = htons(2102);
+    serverAddr.sin_len = INADDR_ANY;
     bind(serverFd, (sockaddr*)&serverAddr, sizeof(serverAddr));
     listen(serverFd, 1);
     std::cout << "FTP server listening on port 2102...\n";

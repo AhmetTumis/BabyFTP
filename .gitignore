@@ -34,3 +34,4 @@
 build/**
 .vscode/**
 server/hosted_files/**
+.DS_Store
